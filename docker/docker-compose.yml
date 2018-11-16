@@ -1,0 +1,17 @@
+version: '3'
+services:
+  php:
+    build: docker
+    image: webforce/php:7.2-fpm
+    volumes:
+      - .:/maSuperbeApplication
+    command: php -S 0.0.0.0:8000 -t /maSuperbeApplication/public
+    ports:
+      - "9053:8000"
+
+  database:
+    image: mysql:5.7
+    volumes:
+      - ./.db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
